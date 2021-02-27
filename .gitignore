@@ -1,4 +1,6 @@
 .DS_Store
+_*.html
+vPortfolio
 node_modules
 #/dist
 #/public

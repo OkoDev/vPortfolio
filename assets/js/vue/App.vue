@@ -1,24 +1,21 @@
-<template>
-
-  <v-app>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+<template src>
+  <div id="app" >
 
     <AppHeader/>
-    <v-content>
-      <router-view/>
 
-    </v-content>
-<!--<Socials/>-->
+    <router-view></router-view>
+
     <AppFooter/>
-  </v-app>
+
+  </div>
 </template>
+
+
 
 <script>
 
-import AppHeader from './components/AppHeader';
-import AppFooter from "./components/AppFooter";
-// import Socials from "./components/Socials";
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 
 export default {
@@ -26,10 +23,14 @@ export default {
   components: {
     AppFooter,
     AppHeader,
-    // Socials,
   },
   data: () => ({
     //
   }),
+  created() {
+    let all = document.createElement('script')
+    all.setAttribute('src', 'js/all.js')
+    document.head.appendChild(all)
+  },
 };
 </script>

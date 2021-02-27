@@ -1,68 +1,74 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import Portfolio from './views/Portfolio.vue'
 import Main from './views/Main.vue'
-import Items from './views/Items.vue'
-import Item from './views/Item.vue'
-import Words from './views/Words.vue'
-import LogOut from "./views/LogOut.vue"
-import Profile from "./views/Profile.vue"
-import SignIn from "./views/SignIn.vue"
-import SignUp from "./views/SignUp.vue"
-import Store from "./store"
+import Services from './views/Services.vue'
+import Resume from './views/Resume.vue'
+import Contact from './views/Contact.vue'
+import Blog from "./views/Blog.vue"
+// import Profile from "./views/Profile.vue"
+// import SignIn from "./views/SignIn.vue"
+// import SignUp from "./views/SignUp.vue"
+// import Store from "./store"
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
+      path: '/portfolio',
+      name: 'portfolio',
+      component: Portfolio
+    },
+    {
       path: '/',
       name: 'main',
       component: Main
     },
     {
-      path: '/items',
-      name: 'items',
-      component: Items
+      path: '/services',
+      name: 'services',
+      component: Services
+    },
+    // {
+    //   path: '/item/:id',
+    //   name: 'item',
+    //   props: true,
+    //   component: Item
+    // },
+    {
+      path: '/resume',
+      name: 'resume',
+      component: Resume
     },
     {
-      path: '/item/:id',
-      name: 'item',
-      props: true,
-      component: Item
+      path: '/contact',
+      name: 'contact',
+      component: Contact
     },
     {
-      path: '/words',
-      name: 'words',
-      component: Words
+      path: '/blog',
+      name: 'blog',
+      component: Blog,
     },
-    {
-      path: '/logout',
-      name: 'logout',
-      component: LogOut
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile,
-      beforeEnter:AuthGuard
-    },
-    {
-      path: '/signin',
-      name: 'signin',
-      component: SignIn
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: SignUp
-    },
+    // {
+    //   path: '/signin',
+    //   name: 'signin',
+    //   component: SignIn
+    // },
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: SignUp
+    // },
   ],
   mode:'history'
 })
 
-function AuthGuard(from,to,next) {
-  if (Store.getters.isUserAuthenticated)
-    next()
-  else
-    next('/signin')
-}
+// function AuthGuard(from,to,next) {
+//   if (Store.getters.isUserAuthenticated)
+//     next()
+//   else
+//     next('/signin')
+// }

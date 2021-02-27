@@ -1,9 +1,10 @@
-$(document).ready(function() {
+(function($) {
 	
 	    
     /* ======= Isotope plugin ======= */
     /* Ref: http://isotope.metafizzy.co/ */
-    // init Isotope    
+    // init Isotope
+
     var $container = $('.isotope');
     
     $container.imagesLoaded(function () {

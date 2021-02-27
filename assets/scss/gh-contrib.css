@@ -11,8 +11,12 @@
     font-size: 10px;
     fill: #767676;
 }
+.ContributionCalendar-label{
+    font-size: 10px;
+    fill: #767676;
+}
 
-.calendar-graph text.month {
+.calendar-graph text.month  {
     font-size: 10px;
     fill: #767676;
 }

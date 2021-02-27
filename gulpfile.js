@@ -1,11 +1,13 @@
 const project = require("path").basename(__dirname);
-// let project = "dist";
-const source = "./assets";
+const source = "assets";
+// const source = require("path").resolve(__dirname,'./assets');
 const fs = require('fs');
+
 
 const {src, dest, parallel, series} = require('gulp'),
     gulp = require('gulp'),
-    webpack = require('webpack-stream'),
+    webpack = require('webpack'),
+    webpackS = require('webpack-stream'),
     browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
     prefixer = require('gulp-autoprefixer'),
@@ -43,31 +45,107 @@ let path = {
     watch: {
         html: source + '/**/*.html',
         css: source + '/**/*.*css',
-        js: source + '/js/**/*.js',
+        js:  source + '/js/**/*.js',
+        vue:  source + '/js/vue/**/*.vue',
         img: source + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
     },
     clean: './' + project + '/',
 }
 
-let webConfig = {
-    entry: source + '/js/vue/app.js',
+
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin.js');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+let webPackConfig = {
+    mode: 'development',
+    entry: require("path").resolve(__dirname,'./assets') + '/js/vue/main.js',
     output: {
-        filename: 'app.js'
+        filename: '../main.js'
     },
     module: {
         rules: [
-            // {
-            //     test: /\.js$/,
-            //     loader: 'babel-loader',
-            //     exclude: '/node_modules/'
-            // }
+            // { loader: require.resolve('./debugger') },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            // example configuring CSS Modules
+            {
+                test: /\.css$/,
+                oneOf: [
+                    // this applies to <style module>
+                    {
+                        resourceQuery: /module/,
+                        use: [
+                            'vue-style-loader',
+                            {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: true,
+                                    localIdentName: '[local]_[hash:base64:8]'
+                                }
+                            }
+                        ]
+                    },
+                    // this applies to <style> or <style scoped>
+                    {
+                        use: [
+                            'vue-style-loader',
+                            'css-loader'
+                        ]
+                    }
+                ]
+            },
+            // exmaple configration for <style lang="scss">
+            {
+                test: /\.scss$/,
+                use: [
+                    'vue-style-loader',
+                    'sass-loader',
+                    {
+                        loader: 'sass-loader',
+                        // global data for all components
+                        // this can be read from a scss file
+                        options: {
+                            data: '$color: red;'
+                        }
+                    }
+                ]
             }
         ]
-    }
+    },
+    resolveLoader: {
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './assets/index.html',
+            filename: '../index.html'
+        }),
+        new VueLoaderPlugin(),
+        new ProvidePlugin({
+            $: 'jquery',
+            jquery: 'jquery',
+            jQuery: 'jquery',
+            'window.jquery': 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
+        }),
+    ]
 };
+
+pack = () => src(path.src.html)
+    .pipe(webpackS(webPackConfig))
+    .pipe(dest(path.build.js))
+    .pipe(browsersync.stream())
+
+
 
 browserSync = (p) => {
     browsersync.init({
@@ -132,8 +210,8 @@ js = (p) => src(path.src.js)
         })
     )
     .pipe(dest(path.build.js))
-    .pipe(webpack(webConfig))
-    .pipe(dest(path.build.js))
+    // .pipe(webpackS(webPackConfig))
+    // .pipe(dest(path.build.js))
     .pipe(browsersync.stream())
 
 
@@ -185,32 +263,33 @@ fontsStyle = (p) => {
                     let fontname = items[i].split('.');
                     fontname = fontname[0];
                     if (c_fontname != fontname) {
-                        fs.appendFile(source + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+                        fs.appendFile(source + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");', cb);
                     }
-                    c_fontname = fontname;
+                     c_fontname = fontname;
                 }
             }
         })
     }
 }
-
 function cb() { }
 
 watchFiles = (p) => {
     gulp.watch([path.watch.html], html);
     gulp.watch([path.watch.css], css);
     gulp.watch([path.watch.js], js);
+    gulp.watch([path.watch.vue], pack);
     gulp.watch([path.watch.img], images);
 }
 
 clean = (p) => del(path.clean);
 
-let build = gulp.series(clean, gulp.parallel(html, css, images, fonts, js), fontsStyle);
+let build = gulp.series(clean, gulp.parallel(html, css, images, fonts, js, pack), fontsStyle);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.html = html;
 exports.css = css;
 exports.js = js;
+exports.pack = pack;
 exports.images = images;
 exports.fonts = fonts;
 exports.fontsStyle = fontsStyle;

@@ -12,8 +12,6 @@
 @@include('../plugins/isotope.pkgd.min.js')
 
 
-
-
 @@include('testimonials.js')
 @@include('isotope-custom.js')
 @@include('blog.js')

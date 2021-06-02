@@ -420,7 +420,7 @@ hr {
 
 .profile-teaser .profile-image {
     max-width: 400px;
-    max-height: 40vh;
+    max-height: 400px;
 }
 
 .profile-teaser .tagline {

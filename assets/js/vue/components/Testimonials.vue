@@ -1,10 +1,10 @@
 <template>
-  <section class="testimonials-section p-3 p-lg-5">
+  <section class="d-none testimonials-section p-3 p-lg-5 ">
     <div class="container">
       <h2 class="section-title font-weight-bold mb-5">Testimonials</h2>
 
       <div class="testiomonial-carousel-container">
-        <div class="testimonial-carousel  tiny-slider">
+        <div class="testimonial-carousel tiny-slider">
           <div class="item">
             <div class="item-inner">
               <div class="quote-holder">

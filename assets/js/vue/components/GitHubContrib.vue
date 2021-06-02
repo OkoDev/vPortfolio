@@ -1,12 +1,11 @@
 <template>
-
+  <!--TODO:new fetch -->
   <section class="github-contribution p-3 p-lg-5">
     <div class="container">
       <h2 class="section-title font-weight-bold mb-5">GitHub Contributions</h2>
 
       <div id="github-widget"
-           class="graph-before-activity-overview-top"
-           data-user="okodev"
+           data-user="OkoDev"
            data-display="pop_repos,calendar">
       </div>
 

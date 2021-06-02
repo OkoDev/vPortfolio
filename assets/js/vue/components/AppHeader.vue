@@ -18,7 +18,7 @@
               <li class="d-none list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
               <li class="list-inline-item"><a href="https://linkedin.com/in/egor-seleznev-04015ba2"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
               <li class="list-inline-item"><a href="https://github.com/OkoDev"><i class="fab fa-github-alt fa-fw"></i></a></li>
-              <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+              <li class="list-inline-item"><a href="https://www.instagram.com/oko.dev/"><i class="fab fa-instagram fa-fw"></i></a></li>
               <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
             </ul><!--//social-list-->
             <hr>
@@ -35,22 +35,26 @@
               <a class="nav-link" ><i class="fas fa-laptop-code fa-fw mr-2"></i>Portfolio</a>
               </router-link>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item d-none">
               <router-link to="/services">
               <a class="nav-link" ><i class="fas fa-briefcase fa-fw mr-2"></i>Services &amp; Pricing</a>
               </router-link>
             </li>
+
             <li class="nav-item">
               <router-link to="/resume">
               <a class="nav-link" ><i class="fas fa-file-alt fa-fw mr-2"></i>Resume</a>
             </router-link>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item d-none">
               <router-link to="/blog">
               <a class="nav-link" ><i class="fas fa-blog fa-fw mr-2"></i>Blog</a>
             </router-link>
             </li>
-            <li class="nav-item">
+
+            <li class="nav-item d-none">
               <router-link to="/contact">
               <a class="nav-link" ><i class="fas fa-envelope-open-text fa-fw mr-2"></i>Contact</a>
             </router-link>

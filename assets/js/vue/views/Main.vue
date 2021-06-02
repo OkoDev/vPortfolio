@@ -6,7 +6,7 @@
 
       <div class="container"><hr></div>
 
-<!--      <Testimonials/>-->
+      <Testimonials/>
 
 <!--      <div class="container"><hr></div>-->
 

@@ -22,12 +22,12 @@ r.onreadystatechange = function () {
 };
 r.send();
 
-function appendCSS(name) {
-    var stylesheet = document.createElement("link")
-    stylesheet.setAttribute("rel", "stylesheet")
-    stylesheet.setAttribute("href", name)
-    document.getElementsByTagName("head")[0].appendChild(stylesheet)
-}
+// function appendCSS(name) {
+//     var stylesheet = document.createElement("link")
+//     stylesheet.setAttribute("rel", "stylesheet")
+//     stylesheet.setAttribute("href", name)
+//     document.getElementsByTagName("head")[0].appendChild(stylesheet)
+// }
 
 // appendCSS('//gh-widget.oyanglul.us/main.css');
 // appendCSS('//cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.css')

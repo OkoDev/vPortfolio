@@ -40,9 +40,6 @@ name: "AboutMe"
 }
 </script>
 
-<style lang="css">
-.about-me-section{
-  height: 100vh;
-}
+<style scoped>
 
 </style>
